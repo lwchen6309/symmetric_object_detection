@@ -102,14 +102,17 @@ if __name__ == '__main__':
     for image_path, filtered_seg in zip(image_paths, filtered_segs):
         if len(filtered_seg) == 0:
             continue
-        file_basename = os.path.basename(image_path)
+        file_basename = os.path.basename(image_path).split('.')[0]
         fig, axes = plt.subplots(1, len(filtered_seg) + 1)
         image = cv2.imread(image_path)
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-
+        
         axes[0].imshow(image)
+        axes[0].axis('off')
         for seg, axis in zip(filtered_seg, axes[1:]):
             axis.imshow(seg)
-
-        plt.savefig(os.path.join("./outputs", f"{file_basename}_output.png"))
+            axis.axis('off')
+            axis.set_frame_on(False)
+        
+        plt.savefig(os.path.join("./outputs", f"{file_basename}_output.png"), bbox_inches='tight', pad_inches=0)
         plt.close()
