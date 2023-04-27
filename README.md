@@ -26,3 +26,30 @@ python symmetric_seg.py
 ```
 
 # Results
+Extract the symmetric masks from SAM
+
+<!-- #region -->
+<p align="center">
+<img  src="outputs/dogs_output.png">
+</p>
+<!-- #endregion -->
+
+<!-- #region -->
+<p align="center">
+<img  src="outputs/104e693a955df89d8fb6aff46154844a_output.png">
+</p>
+<!-- #endregion -->
+
+<!-- #region -->
+<p align="center">
+<img  src="outputs/17deb0517c2136b00ea1e8a9dfd1d20e_output.png">
+</p>
+<!-- #endregion -->
+
+<!-- #region -->
+<p align="center">
+<img  src="outputs/1dcd14d4a97445597fa6df5429d5e3f3_output.png">
+</p>
+<!-- #endregion -->
+
+
