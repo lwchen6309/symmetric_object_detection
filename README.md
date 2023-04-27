@@ -8,7 +8,10 @@ This repo use the Segment Anything Model
 ```
 pip install git+https://github.com/facebookresearch/segment-anything.git
 ```
-Noting that pytorch and torchvision is required in prior to install SAM.
+Noting that pytorch and torchvision is required in prior to install SAM. Additionally, please install the prereuisite of SAM
+```
+pip install opencv-python pycocotools matplotlib onnxruntime onnx
+```
 
 Setup SAM checkpoint from SAM and prepare images
 ```
@@ -19,6 +22,7 @@ Setup SAM checkpoint from SAM and prepare images
   |
   --- *.pth
 ```
+
 
 ## Run the scrip
 ```
