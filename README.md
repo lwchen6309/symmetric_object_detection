@@ -13,14 +13,14 @@ Noting that pytorch and torchvision is required in prior to install SAM. Additio
 pip install opencv-python pycocotools matplotlib onnxruntime onnx
 ```
 
-Setup SAM checkpoint from SAM and prepare images
+Following the instruction [here](https://github.com/facebookresearch/segment-anything#model-checkpoints) to setup SAM checkpoint from SAM and prepare images to be detected
 ```
 --- images
   |
-  --- *.jpg or *.png
+  -- *.jpg or *.png
 --- models
   |
-  --- *.pth
+  -- *.pth
 ```
 
 
