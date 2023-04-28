@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.ndimage import rotate
+import cv2
 
 
 def shift_image(image, shift_distance):
@@ -36,6 +37,7 @@ def flip_mask_with_symmetric_center(mask, center, theta):
     
     Returns:
     flipped_mask -- 2D numpy array, flipped binary mask
+    symmetric_axis -- 2D numpy array, binary mask indicating the symmetric axis
     """
     
     # Compute shift required to center the bounding box in the image
@@ -54,7 +56,17 @@ def flip_mask_with_symmetric_center(mask, center, theta):
     # Shift the image back to its original position
     flipped_mask = np.roll(flipped_mask, shift, axis=(0, 1))
     
-    return flipped_mask
+    # Create a binary mask indicating the symmetric axis
+    h, w = mask.shape
+    x, y = center
+    line_len = int(np.sqrt(h**2 + w**2))
+    x1 = int(x - np.cos(np.radians(theta)) * line_len)
+    y1 = int(y - np.sin(np.radians(theta)) * line_len)
+    x2 = int(x + np.cos(np.radians(theta)) * line_len)
+    y2 = int(y + np.sin(np.radians(theta)) * line_len)
+    symmetric_axis = np.zeros((h, w), dtype=np.uint8)
+    cv2.line(symmetric_axis, (y1, x1), (y2, x2), (255, 255, 255), thickness=4)  
+    return flipped_mask, symmetric_axis
 
 
 # Create an ellipse
@@ -68,12 +80,13 @@ ellipse = ((x / 30) ** 2 + (y / 20) ** 2 <= 1)
 ellipse = ellipse.astype(np.float32)
 ellipse = shift_image(ellipse, [offset[0], offset[1]])
 
-final_ellipse = flip_mask_with_symmetric_center(ellipse, center, theta)
+final_ellipse, symmetric_axis = flip_mask_with_symmetric_center(ellipse, center, theta)
 
 # Plot each step of the process
-fig, axs = plt.subplots(2)
-axs[0].imshow(ellipse, alpha=0.5)
-axs[0].set_title('Original ellipse')
-axs[0].imshow(final_ellipse, alpha=0.5)
-axs[0].set_title('Final ellipse')
+fig, axs = plt.subplots(1)
+axs.imshow(ellipse, alpha=0.5)
+axs.set_title('Original ellipse')
+axs.imshow(final_ellipse, alpha=0.5)
+axs.set_title('Final ellipse')
+axs.imshow(symmetric_axis, alpha=0.5)
 plt.show()
