@@ -1,9 +1,9 @@
-# symmetric_object_detection
+# Symmetric Object Detection
 Detect symmtric object by using [Segment Anything Model](https://github.com/facebookresearch/segment-anything) (SAM)
 
 This repo use the Segment Anything Model
 
-# To run the code
+# Installation
 ## Installation of SAM
 ```
 pip install git+https://github.com/facebookresearch/segment-anything.git
@@ -23,8 +23,7 @@ Following the instruction [here](https://github.com/facebookresearch/segment-any
   -- *.pth
 ```
 
-
-## Run the scrip
+# Run the scrip
 ```
 python symmetric_seg.py
 ```
@@ -64,6 +63,8 @@ This script detects the symmetric axis of the objects in all the images under di
 # Results
 Extract the symmetric masks from SAM
 
+- The detector successfully find the symmetric axis.
+
 <!-- #region -->
 <p align="center">
 <img  src="outputs/104e693a955df89d8fb6aff46154844a_output.png">
@@ -82,10 +83,13 @@ Extract the symmetric masks from SAM
 </p>
 <!-- #endregion -->
 
+- The detector works even for multiple symmetric axes with various angles.
+
 <!-- #region -->
 <p align="center">
 <img  src="outputs/1dcd14d4a97445597fa6df5429d5e3f3_output.png">
 </p>
+
 <!-- #endregion -->
 
 
